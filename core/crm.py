@@ -173,23 +173,7 @@ class CRM:
             else:
                 print("Contato inválido.")
         except (ValueError, IndexError):
-            print("Entrada inválida.")
-
-     '''def add_track_atividade(self):
-         if not self.contatos:
-             print("Nenhum contato cadastrado.")
-             return
-         self.listar_contatos()
-         try:
-             idx = int(input("Escolha o contato (número): ")) - 1
-             if 0 <= idx < len(self.contatos):
-                 print("\nAtividades do contato:")
-                 for i, act in enumerate(self.contatos[idx].activities):
-                     print(f"{i+1}. {act.activity_type} - {act.description} ({act.date})")
-             else:
-                 print("Contato inválido.")
-         except (ValueError, IndexError):
-             print("Entrada inválida.")  '''     
+            print("Entrada inválida.")   
 
     def add_task(self):
         if not self.contatos:
@@ -328,3 +312,4 @@ class CRM:
                 "7. Relatórios de campanhas",
                 "8. Sair"
             ]
+
