@@ -4,6 +4,11 @@ from models.base import UserRole
 def main():
     crm = CRM()
     while True:
+
+        if crm.current_user_role is None:
+            crm.change_user_role()
+            continue
+
         menu_options = crm.get_menu_by_role()
         
         print(f"\n--- CRM - {crm.current_user_role.value.upper()} ---")
@@ -68,3 +73,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
