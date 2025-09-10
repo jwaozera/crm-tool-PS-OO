@@ -12,7 +12,7 @@ class CRM:
         self.campanhas = []
         self.leads = []
         self.documentos = []
-        self.current_user_role = UserRole.CLIENTE  # user atual
+        self.current_user_role = None  # user inicial
         self.load_data()
 
     def save_data(self): 
@@ -312,4 +312,5 @@ class CRM:
                 "7. Relatórios de campanhas",
                 "8. Sair"
             ]
+
 
