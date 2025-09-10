@@ -11,7 +11,7 @@ class CRM:
         self.contatos = []
         self.campanhas = []
         self.leads = []
-        self.documentos = []
+        self.documents = []
         self.current_user_role = None  # user inicial
         self.load_data()
 
@@ -20,7 +20,7 @@ class CRM:
             "contatos": [c.to_dict() for c in self.contatos],
             "campanhas": [c.to_dict() for c in self.campanhas],
             "leads": [l.to_dict() for l in self.leads],
-            "documentos": [d.to_dict() for d in self.documentos]
+            "documents": [d.to_dict() for d in self.documents]
         }
         with open("crm_data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
@@ -32,12 +32,12 @@ class CRM:
                 self.contatos = [Contato.from_dict(c) for c in data.get("contatos", [])]
                 self.campanhas = [EmailCampanha.from_dict(c) for c in data.get("campanhas", [])]
                 self.leads = [Lead.from_dict(l) for l in data.get("leads", [])]
-                self.documentos = [Document.from_dict(d) for d in data.get("documentos", [])]
+                self.documents = [Document.from_dict(d) for d in data.get("documents", [])]
         except FileNotFoundError:
             self.contatos = []
             self.campanhas = []
             self.leads = []
-            self.documentos = []
+            self.documents = []
 
     def add_contato(self):
         print("\n=== Novo Contato ===")
@@ -89,7 +89,7 @@ class CRM:
         doc_type = input("Tipo (proposta/contrato/outro): ") or "outro"
         
         doc = Document(title, file_path, doc_type)
-        self.documentos.append(doc)
+        self.documents.append(doc)
         
         # Opção de associar a um contato
         print("\nDeseja associar a um contato? (s/n)")
@@ -98,7 +98,7 @@ class CRM:
             try:
                 idx = int(input("Escolha o contato (número): ")) - 1
                 if 0 <= idx < len(self.contatos):
-                    self.contatos[idx].documentos.append(doc)
+                    self.contatos[idx].documents.append(doc)
             except (ValueError, IndexError):
                 print("Contato inválido, documento salvo apenas no sistema.")
         
@@ -107,12 +107,12 @@ class CRM:
 
     def list_documentos(self):
         """Lista todos os documentos"""
-        if not self.documentos:
+        if not self.documents:
             print("Nenhum documento encontrado.")
             return
         
-        print("\n=== Documentos ===")
-        for i, doc in enumerate(self.documentos):
+        print("\n=== documentos ===")
+        for i, doc in enumerate(self.documents):
             print(f"{i+1}. {doc.title} ({doc.doc_type}) - {doc.created_at}")
 
     def add_lead(self):
@@ -253,7 +253,7 @@ class CRM:
         print(f"Total de contatos: {len(self.contatos)}")
         print(f"Total de leads: {len([l for l in self.leads if not l.converted])}")
         print(f"Total de campanhas: {len(self.campanhas)}")
-        print(f"Total de documentos: {len(self.documentos)}")
+        print(f"Total de documentos: {len(self.documents)}")
         
         # Relatório por estágio
         por_estagio = {"Lead": 0, "Prospecto": 0, "Proposta": 0, "Negociação": 0, "Venda fechada": 0}
@@ -312,5 +312,4 @@ class CRM:
                 "7. Relatórios de campanhas",
                 "8. Sair"
             ]
-
 
