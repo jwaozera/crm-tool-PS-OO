@@ -15,7 +15,7 @@ class Contato(Pessoa):  # Herda de Pessoa
         self.stage_history = ["Lead"]
         self.activities = []
         self.tasks = []
-        self.documentos = []  # documentos
+        self.documents = []  # documentos
 
     def to_dict(self):
         return {
@@ -75,3 +75,4 @@ class Lead(Pessoa):  # Herda de Pessoa
         lead.score = data.get("score", 0)
         lead.converted = data.get("converted", False)
         return lead
+
